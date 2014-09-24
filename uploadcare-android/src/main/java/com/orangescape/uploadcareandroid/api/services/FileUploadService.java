@@ -1,6 +1,7 @@
-package com.orangescape.uploadcareandroid.api;
+package com.orangescape.uploadcareandroid.api.services;
 
-import retrofit.client.Response;
+import com.orangescape.uploadcareandroid.api.UploadedFile;
+
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
@@ -9,7 +10,7 @@ import retrofit.mime.TypedFile;
 /**
  * Created by gautam on 22/9/14.
  */
-public interface UploadCareService {
+public interface FileUploadService {
     static final String UPLOADCARE_PUB_KEY = "UPLOADCARE_PUB_KEY";
     static final String UPLOADCARE_STORE = "UPLOADCARE_STORE";
     public static final int STORE_FILES = 1, DONT_STORE_FILES = 0;
@@ -17,5 +18,9 @@ public interface UploadCareService {
 
     @Multipart
     @POST("/base/")
-    public File uploadfile(@Part(UPLOADCARE_PUB_KEY) String key, @Part(UPLOADCARE_STORE) int store, @Part("file") TypedFile file);
+    public UploadedFile uploadFile(
+            @Part(UPLOADCARE_PUB_KEY) String key,
+            @Part(UPLOADCARE_STORE) int store,
+            @Part("file") TypedFile file
+    );
 }
